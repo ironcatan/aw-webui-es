@@ -32,6 +32,7 @@ import {
 } from 'vue-d3-sunburst';
 import 'vue-d3-sunburst/dist/vue-d3-sunburst.css';
 import { getColorFromCategory } from '~/util/color';
+import { detectPreferredTheme } from '~/util/theme';
 
 import { useCategoryStore } from '~/stores/categories';
 import { useSettingsStore } from '~/stores/settings';
@@ -84,7 +85,8 @@ export default {
     colorfunc: function (s) {
       // 'All' needs to be bright if light theme, and dark if dark theme
       const settings = useSettingsStore();
-      if (s == 'All') return settings.theme == 'light' ? '#fff' : '#333';
+      const theme = settings.theme == 'auto' ? detectPreferredTheme() : settings.theme;
+      if (s == 'All') return theme == 'light' ? '#fff' : '#333';
 
       const categoryStore = useCategoryStore();
       const cat = categoryStore.get_category(s.split(SEP));
