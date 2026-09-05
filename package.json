@@ -127,7 +127,7 @@
     "ts-jest": "^29",
     "ts-loader": "^9.5",
     "tslint": "^5.20.1",
-    "typescript": "^5.2",
+    "typescript": "^7.0",
     "url-loader": "^4.1",
     "vite-plugin-pwa": "^1.0.0",
     "vue": "^2.7",
