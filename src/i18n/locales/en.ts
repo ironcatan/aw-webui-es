@@ -1,6 +1,6 @@
 export default {
   app: {
-    name: 'ActivityWatch',
+    name: 'Chronly',
     researchEdition: 'Research Edition',
   },
   nav: {

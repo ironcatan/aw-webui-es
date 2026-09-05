@@ -1,17 +1,22 @@
-# aw-webui
+# Chronly (aw-webui fork)
 
-<img src="assets/logo.svg" alt="ActivityWatch logo" width="120" />
+A web-based UI for time tracking, built with Vue.js.
 
-A web-based UI for ActivityWatch, built with Vue.js
+**This is Chronly, a private fork of [ActivityWatch](https://activitywatch.net/)'s
+`aw-webui`, maintained by Manuel Arroyo Algar. It is not affiliated with or
+endorsed by the ActivityWatch project.** Licensed under MPLv2, same as upstream.
 
 [![Build Status](https://github.com/ActivityWatch/aw-webui/workflows/Build/badge.svg)](https://github.com/ActivityWatch/aw-webui/actions)
 [![Coverage Status](https://codecov.io/gh/ActivityWatch/aw-webui/branch/master/graph/badge.svg)](https://codecov.io/gh/ActivityWatch/aw-webui)
 [![Known Vulnerabilities](https://snyk.io/test/github/ActivityWatch/aw-webui/badge.svg)](https://snyk.io/test/github/ActivityWatch/aw-webui)
 
-## Traducción al español
+## Cambios sobre el original
 
-Este fork incluye una traducción completa de la interfaz al español (`es`),
-realizada por Manuel Arroyo Algar. Selecciónala en Ajustes → Idioma.
+- Traducción completa de la interfaz al español (`es`), realizada por Manuel
+  Arroyo Algar. Selecciónala en Ajustes → Idioma.
+- Renombrado a "Chronly" en la interfaz (título, barra de navegación, PWA).
+- Nueva pantalla Ajustes → Gestión de datos (backup/restauración/purga de
+  datos antiguos + tamaño de la base de datos).
 
 ## Getting started
 
