@@ -28,7 +28,10 @@ export default {
   },
   watch: {
     periodusage_arr: function () {
-      periodusage.update(this.$el, this.periodusage_arr, this.onPeriodClicked);
+      periodusage.update(this.$el, this.periodusage_arr, this.onPeriodClicked, {
+        noData: this.$t('periodUsage.noData'),
+        today: this.$t('periodUsage.today'),
+      });
     },
   },
   mounted: function () {

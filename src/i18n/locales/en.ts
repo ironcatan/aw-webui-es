@@ -13,6 +13,7 @@ export default {
     tools: 'Tools',
     search: 'Search',
     workReport: 'Work Report',
+    billing: 'Billable Hours',
     aiSummary: 'AI Summary',
     trends: 'Trends',
     report: 'Report',
@@ -324,6 +325,12 @@ export default {
     moreDateRanges: 'More date ranges',
     previousPeriod: 'Previous {period}',
     nextPeriod: 'Next {period}',
+    defaultViewNames: {
+      summary: 'Summary',
+      window: 'Window',
+      browser: 'Browser',
+      editor: 'Editor',
+    },
   },
   activityView: {
     addVisualization: 'Add visualization',
@@ -687,6 +694,8 @@ export default {
     noHostSelectedError: 'Please select at least one host.',
     noSupportedHostsError: 'No supported hosts (require aw-watcher-afk): {hosts}',
     loadErrorPrefix: 'Error loading data: {message}',
+    csvPeriodPrefix: '# Period: {start} to {end}',
+    csvGeneratedPrefix: '# Generated: {date}',
   },
   selectableEventView: {
     eventList: 'Event List',
@@ -888,5 +897,9 @@ export default {
   visTimeline: {
     editSavedToast: 'Your edit is saved. Refresh the timeline to see it reflected.',
     headsUp: 'Heads up',
+  },
+  periodUsage: {
+    noData: 'No data',
+    today: 'Today',
   },
 };

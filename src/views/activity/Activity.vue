@@ -124,7 +124,7 @@ div
   ul.row.nav.nav-tabs.mt-4
     li.nav-item(v-for="view in views")
       router-link.nav-link(:to="{ name: 'activity-view', params: {...$route.params, view_id: view.id}, query: $route.query}" :class="{'router-link-exact-active': currentView.id == view.id}")
-        h6 {{view.name}}
+        h6 {{viewDisplayName(view)}}
 
     li.nav-item(style="margin-left: auto")
       a.nav-link(@click="$refs.new_view.show()")
@@ -459,6 +459,11 @@ export default {
   },
 
   methods: {
+    viewDisplayName(view: { id: string; name: string }): string {
+      const key = `activity.defaultViewNames.${view.id}`;
+      const translated = this.$t(key);
+      return translated !== key ? translated : view.name;
+    },
     previousPeriod: function () {
       return moment(this._date)
         .subtract(

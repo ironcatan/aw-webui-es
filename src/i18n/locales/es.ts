@@ -17,6 +17,7 @@ export default {
     tools: 'Herramientas',
     search: 'Buscar',
     workReport: 'Informe de trabajo',
+    billing: 'Horas facturables',
     aiSummary: 'Resumen de IA',
     trends: 'Tendencias',
     report: 'Informe',
@@ -336,6 +337,12 @@ export default {
     moreDateRanges: 'Más rangos de fechas',
     previousPeriod: '{period} anterior',
     nextPeriod: '{period} siguiente',
+    defaultViewNames: {
+      summary: 'Resumen',
+      window: 'Ventana',
+      browser: 'Navegador',
+      editor: 'Editor',
+    },
   },
   activityView: {
     addVisualization: 'Añadir visualización',
@@ -704,6 +711,8 @@ export default {
     noHostSelectedError: 'Selecciona al menos un host.',
     noSupportedHostsError: 'Ningún host compatible (requiere aw-watcher-afk): {hosts}',
     loadErrorPrefix: 'Error al cargar los datos: {message}',
+    csvPeriodPrefix: '# Periodo: {start} a {end}',
+    csvGeneratedPrefix: '# Generado: {date}',
   },
   selectableEventView: {
     eventList: 'Lista de eventos',
@@ -908,5 +917,9 @@ export default {
   visTimeline: {
     editSavedToast: 'Tu edición se ha guardado. Recarga la línea de tiempo para verla reflejada.',
     headsUp: 'Aviso',
+  },
+  periodUsage: {
+    noData: 'Sin datos',
+    today: 'Hoy',
   },
 };

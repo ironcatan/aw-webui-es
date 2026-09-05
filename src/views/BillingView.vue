@@ -300,9 +300,12 @@ export default {
       const tp = this.queriedPeriod || this.getTimeperiod();
       const [start, end] = tp.split('/');
       const header = [
-        `# Billable Hours Export`,
-        `# Period: ${moment(start).format('YYYY-MM-DD')} to ${moment(end).format('YYYY-MM-DD')}`,
-        `# Generated: ${moment().format('YYYY-MM-DD HH:mm')}`,
+        `# ${this.$t('billing.title')}`,
+        this.$t('billing.csvPeriodPrefix', {
+          start: moment(start).format('YYYY-MM-DD'),
+          end: moment(end).format('YYYY-MM-DD'),
+        }),
+        this.$t('billing.csvGeneratedPrefix', { date: moment().format('YYYY-MM-DD HH:mm') }),
         '',
       ].join('\n');
 
