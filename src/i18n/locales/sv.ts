@@ -55,6 +55,7 @@ export default {
     languageDe: 'Deutsch',
     languageRu: 'Русский',
     languageZhCN: '简体中文',
+    languageEs: 'Español',
     languageSv: 'Svenska',
     rangeTo: 'till',
   },

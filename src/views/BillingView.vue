@@ -1,19 +1,19 @@
 <template lang="pug">
 div
-  h3.mb-3 Billable Hours Export
+  h3.mb-3 {{ $t('billing.title') }}
 
   div.row.mb-4
     div.col-md-4
-      b-form-group(label="Hosts" label-class="font-weight-bold")
+      b-form-group(:label="$t('workReport.hostsLabel')" label-class="font-weight-bold")
         b-form-select(v-model="selectedHosts" :options="hostOptions" multiple :select-size="4")
-        small.text-muted Select devices to include
+        small.text-muted {{ $t('workReport.selectHostsHint') }}
 
     div.col-md-4
-      b-form-group(label="Date Range" label-class="font-weight-bold")
+      b-form-group(:label="$t('workReport.dateRangeLabel')" label-class="font-weight-bold")
         b-form-select(v-model="dateRange" :options="dateRangeOptions")
 
     div.col-md-4
-      b-form-group(label="Hourly Rate (optional)" label-class="font-weight-bold")
+      b-form-group(:label="$t('billing.hourlyRateLabel')" label-class="font-weight-bold")
         b-input-group(prepend="$")
           b-form-input(
             v-model.number="defaultRate"
@@ -22,19 +22,19 @@ div
             step="0.01"
             placeholder="0.00"
           )
-        small.text-muted Default rate applied to all categories. Override per row below.
+        small.text-muted {{ $t('billing.rateHint') }}
 
   div.mb-3
     b-button(@click="loadData" variant="primary" :disabled="loading")
       icon(name="sync")
-      |  Calculate Hours
+      |  {{ $t('billing.calculateHoursBtn') }}
     b-button.ml-2(@click="exportCSV" variant="outline-secondary" :disabled="!hasData")
       icon(name="download")
-      |  Export CSV
+      |  {{ $t('workReport.exportCsvBtn') }}
 
   div(v-if="loading")
     b-spinner.mr-2
-    | Loading...
+    | {{ $t('workReport.loading') }}
 
   div(v-if="errorMessage")
     b-alert(variant="danger" show) {{ errorMessage }}
@@ -43,16 +43,16 @@ div
     div.row.mb-2
       div.col
         small.text-muted
-          | Period: {{ periodLabel }} · Total: {{ formatDuration(totalDuration) }}
-          span(v-if="defaultRate > 0")  · Est. Total: {{ formatAmount(totalAmount) }}
+          | {{ $t('billing.periodLabel') }} {{ periodLabel }} {{ $t('billing.totalLabel') }} {{ formatDuration(totalDuration) }}
+          span(v-if="defaultRate > 0")  {{ $t('billing.estTotalLabel') }} {{ formatAmount(totalAmount) }}
 
     table.table.table-sm.table-hover
       thead
         tr
-          th Category
-          th.text-right Hours
-          th.text-right Rate ($/h)
-          th.text-right Amount
+          th {{ $t('billing.categoryCol') }}
+          th.text-right {{ $t('billing.hoursCol') }}
+          th.text-right {{ $t('billing.rateCol') }}
+          th.text-right {{ $t('billing.amountCol') }}
       tbody
         tr(v-for="row in categoryRows" :key="row.key")
           td
@@ -72,7 +72,7 @@ div
           td.text-right {{ formatAmount(getAmount(row)) }}
       tfoot
         tr.font-weight-bold
-          td Total
+          td {{ $t('workReport.totalRow') }}
           td.text-right {{ formatHours(totalDuration) }}
           td.text-right —
           td.text-right {{ formatAmount(totalAmount) }}
@@ -152,10 +152,10 @@ export default {
     },
     dateRangeOptions() {
       return [
-        { value: 'thisMonth', text: 'This month' },
-        { value: 'last30d', text: 'Last 30 days' },
-        { value: 'thisWeek', text: 'This week' },
-        { value: 'last7d', text: 'Last 7 days' },
+        { value: 'thisMonth', text: this.$t('workReport.thisMonthOption') },
+        { value: 'last30d', text: this.$t('workReport.last30dOption') },
+        { value: 'thisWeek', text: this.$t('workReport.thisWeekOption') },
+        { value: 'last7d', text: this.$t('workReport.last7dOption') },
       ];
     },
     hasData() {
@@ -205,7 +205,7 @@ export default {
         const client = getClient();
 
         if (this.selectedHosts.length === 0) {
-          this.errorMessage = 'Please select at least one host.';
+          this.errorMessage = this.$t('billing.noHostSelectedError');
           return;
         }
 
@@ -218,9 +218,9 @@ export default {
           this.bucketsStore.buckets || []
         );
         if (hostsToQuery.length === 0) {
-          this.errorMessage = `No supported hosts (require aw-watcher-afk): ${unsupported.join(
-            ', '
-          )}`;
+          this.errorMessage = this.$t('billing.noSupportedHostsError', {
+            hosts: unsupported.join(', '),
+          });
           return;
         }
 
@@ -259,7 +259,7 @@ export default {
             };
           });
       } catch (err: any) {
-        this.errorMessage = `Error loading data: ${err?.message || err}`;
+        this.errorMessage = this.$t('billing.loadErrorPrefix', { message: err?.message || err });
         console.error(err);
       } finally {
         this.loading = false;

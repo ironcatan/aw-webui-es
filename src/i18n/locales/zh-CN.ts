@@ -55,6 +55,7 @@ export default {
     languageRu: 'Русский',
     languageSv: 'Svenska',
     languageZhCN: '简体中文',
+    languageEs: 'Español',
     rangeTo: '至',
   },
   notFound: {

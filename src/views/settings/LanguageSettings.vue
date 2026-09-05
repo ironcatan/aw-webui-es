@@ -11,6 +11,7 @@ div
         option(value="ru") {{ $t('common.languageRu') }}
         option(value="sv") {{ $t('common.languageSv') }}
         option(value="zh-CN") {{ $t('common.languageZhCN') }}
+        option(value="es") {{ $t('common.languageEs') }}
       span(v-else)
         .aw-loading {{ $t('common.loading') }}
   small
