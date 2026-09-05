@@ -30,6 +30,8 @@ export default {
   },
   footer: {
     basedOn: 'Chronly — basado en ActivityWatch (MPLv2)',
+    by: 'Por Manuel Arroyo Algar',
+    github: 'GitHub',
     host: 'Host:',
     version: 'Versión:',
   },
