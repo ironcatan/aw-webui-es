@@ -1,10 +1,17 @@
 # aw-webui
 
+<img src="assets/logo.svg" alt="ActivityWatch logo" width="120" />
+
 A web-based UI for ActivityWatch, built with Vue.js
 
 [![Build Status](https://github.com/ActivityWatch/aw-webui/workflows/Build/badge.svg)](https://github.com/ActivityWatch/aw-webui/actions)
 [![Coverage Status](https://codecov.io/gh/ActivityWatch/aw-webui/branch/master/graph/badge.svg)](https://codecov.io/gh/ActivityWatch/aw-webui)
 [![Known Vulnerabilities](https://snyk.io/test/github/ActivityWatch/aw-webui/badge.svg)](https://snyk.io/test/github/ActivityWatch/aw-webui)
+
+## Traducción al español
+
+Este fork incluye una traducción completa de la interfaz al español (`es`),
+realizada por Manuel Arroyo Algar. Selecciónala en Ajustes → Idioma.
 
 ## Getting started
 
