@@ -9,7 +9,13 @@ import { getCategoryColorFromString } from '~/util/color';
 import { seconds_to_duration } from '~/util/time';
 import { IEvent } from '~/util/interfaces';
 
-const textColor = '#333';
+// dark.css forces `svg text { fill: #fff !important; }` for dark mode, which is
+// unreadable on the light pastel bar colors used here (e.g. the bright green
+// "not-afk" color). Pick text color from the bar's own background instead of
+// the theme, and set it with 'important' priority so it wins over that rule.
+function textColorFor(bgColor: string): string {
+  return Color(bgColor).isLight() ? '#222' : '#fff';
+}
 
 function create(container: HTMLElement) {
   // Clear element
@@ -81,6 +87,7 @@ function update(container: HTMLElement, apps: Entry[]) {
     }
 
     const hovercolor = Color(appcolor).darken(0.1).hex();
+    const textColor = textColorFor(appcolor);
 
     // Add a parent <a> element if link is set
     const a = app.link ? svg.append('a').attr('href', app.link) : svg;
@@ -121,7 +128,7 @@ function update(container: HTMLElement, apps: Entry[]) {
       .text(displayName)
       .attr('font-family', 'sans-serif')
       .attr('font-size', textSize + 'px')
-      .attr('fill', textColor);
+      .style('fill', textColor, 'important');
 
     // Duration
     eg.append('text')
@@ -130,7 +137,7 @@ function update(container: HTMLElement, apps: Entry[]) {
       .text(seconds_to_duration(app.duration))
       .attr('font-family', 'sans-serif')
       .attr('font-size', textSize - 3 + 'px')
-      .attr('fill', '#444');
+      .style('fill', textColor, 'important');
 
     curr_y += barHeight + 5;
   });
