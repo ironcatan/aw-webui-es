@@ -2,7 +2,7 @@
 div
   b-row
     b-col(cols="12", md="6").mb-2
-      b-form-group(label="Bucket")
+      b-form-group(:label="$t('bucketValidate.bucketLabel')")
         b-form-select(
           v-model="selectedBucketId",
           :options="bucketOptions",
@@ -11,9 +11,9 @@ div
     b-col(cols="12", md="6").mb-2
       b-form-group
         template(#label)
-          span Field in event data
+          span {{ $t('topBucketData.fieldLabel') }}
           span.info-icon(
-            title="Field names come from event data. Dot notation is supported (e.g., data.title)."
+            :title="$t('topBucketData.fieldTooltip')"
           ) i
         b-form-select(
           v-model="selectedField",
@@ -23,19 +23,19 @@ div
         b-form-input.mt-2(
           v-if="selectedField === '__custom' || fieldOptions.length === 0",
           v-model="customField",
-          placeholder="e.g. data.title",
+          :placeholder="$t('topBucketData.customFieldPlaceholder')",
           :disabled="loading"
         )
   b-alert.mt-2(v-if="error", show, variant="danger") {{ error }}
   b-alert.mt-2(v-else-if="!selectedBucketId" show variant="info")
-    | Select a watcher to load events for this period.
+    | {{ $t('topBucketData.selectWatcherHint') }}
   b-alert.mt-2(v-else-if="!loading && aggregated.length === 0" show variant="warning")
-    | No events found for this watcher and time range.
+    | {{ $t('topBucketData.noEventsFound') }}
 
   div.mt-2
     div.text-center.py-4(v-if="loading")
       b-spinner(small type="grow" label="Loading")
-      span.ml-2 Loading events...
+      span.ml-2 {{ $t('topBucketData.loadingEvents') }}
     aw-summary(
       v-else-if="aggregated.length",
       :fields="aggregated",
@@ -45,7 +45,7 @@ div
       with_limit
     )
     div.text-muted.text-center.py-4(v-else)
-      | Pick a field to see results.
+      | {{ $t('topBucketData.pickFieldHint') }}
 </template>
 
 <script lang="ts">
@@ -58,9 +58,9 @@ interface AggregatedEvent {
   duration: number;
   data: Record<string, any>;
 }
-function formatValue(value: unknown): string {
+function formatValue(value: unknown, unknownLabel: string): string {
   if (Array.isArray(value)) return value.join(' > ');
-  if (value === null || value === undefined) return 'Unknown';
+  if (value === null || value === undefined) return unknownLabel;
   if (typeof value === 'object') return JSON.stringify(value);
   return String(value);
 }
@@ -94,7 +94,7 @@ export default {
     },
     fieldSelectOptions(): { value: string; text: string }[] {
       const options = this.fieldOptions.map(f => ({ value: f, text: f }));
-      options.push({ value: '__custom', text: 'Custom field…' });
+      options.push({ value: '__custom', text: this.$t('topBucketData.customFieldOption') });
       return options;
     },
     selectedFieldValue(): string {
@@ -180,7 +180,7 @@ export default {
         console.error(err);
         this.events = [];
         this.fieldOptions = [];
-        this.error = err?.message || 'Failed to load events for the selected watcher.';
+        this.error = err?.message || this.$t('topBucketData.loadFailedDefault');
       } finally {
         this.loading = false;
       }
@@ -205,7 +205,7 @@ export default {
       const grouped = new Map<string, AggregatedEvent>();
       this.events.forEach(e => {
         const value = _.get(e, path);
-        const display = formatValue(value);
+        const display = formatValue(value, this.$t('topBucketData.unknownValue') as string);
         const key = Array.isArray(value) ? JSON.stringify(value) : String(display);
         if (!grouped.has(key)) {
           grouped.set(key, {

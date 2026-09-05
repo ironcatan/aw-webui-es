@@ -1,29 +1,27 @@
 <template lang="pug">
 div
-  h3.mb-3 AI Activity Summary
+  h3.mb-3 {{ $t('aiSummaryView.title') }}
 
   b-alert(variant="info" show)
-    | Your API key is kept only in this page's memory and sent directly to the LLM provider.
-    |  It is cleared when the page reloads and ActivityWatch does not receive it.
-    |  For deeper analysis with agents, see the
-    |  #[a(href="https://docs.activitywatch.net/en/latest/examples/agents-and-ai.html") ActivityWatch agents and AI guide].
+    | {{ $t('aiSummaryView.disclaimerPrefix') }}
+    |  #[a(href="https://docs.activitywatch.net/en/latest/examples/agents-and-ai.html") {{ $t('aiSummaryView.agentsGuideLink') }}].
 
   div.row.mb-3
     div.col-md-4
-      b-form-group(label="Host" label-class="font-weight-bold")
+      b-form-group(:label="$t('aiSummaryView.hostLabel')" label-class="font-weight-bold")
         b-form-select(v-model="selectedHost" :options="hostOptions")
 
     div.col-md-4
-      b-form-group(label="Date Range" label-class="font-weight-bold")
+      b-form-group(:label="$t('workReport.dateRangeLabel')" label-class="font-weight-bold")
         b-form-select(v-model="dateRange" :options="dateRangeOptions")
 
     div.col-md-4
-      b-form-group(label="LLM Provider" label-class="font-weight-bold")
+      b-form-group(:label="$t('aiSummaryView.providerLabel')" label-class="font-weight-bold")
         b-form-select(v-model="provider" :options="providerOptions" @change="onProviderChange")
 
   div.row.mb-3
     div.col-md-6
-      b-form-group(label="API Key" label-class="font-weight-bold")
+      b-form-group(:label="$t('aiSummaryView.apiKeyLabel')" label-class="font-weight-bold")
         b-form-input(
           v-model="apiKey"
           type="password"
@@ -33,22 +31,22 @@ div
         )
 
     div.col-md-6
-      b-form-group(label="Model" label-class="font-weight-bold")
-        b-form-input(v-model="model" placeholder="e.g. gpt-4o-mini" @blur="persistConfig")
+      b-form-group(:label="$t('aiSummaryView.modelLabel')" label-class="font-weight-bold")
+        b-form-input(v-model="model" :placeholder="$t('aiSummaryView.modelPlaceholder')" @blur="persistConfig")
 
   div.mb-3
-    b-form-group(label="Prompt" label-class="font-weight-bold")
+    b-form-group(:label="$t('aiSummaryView.promptLabel')" label-class="font-weight-bold")
       b-form-textarea(v-model="userPrompt" rows="3" max-rows="8")
 
   div.mb-4
     b-button(@click="generate" variant="primary" :disabled="loading || !apiKey || !selectedHost")
       b-spinner.mr-2(v-if="loading" small)
-      | {{ loading ? 'Generating…' : 'Generate Summary' }}
+      | {{ loading ? $t('aiSummaryView.generating') : $t('aiSummaryView.generateBtn') }}
     b-button.ml-2(
       v-if="aggregatedText"
       variant="outline-secondary"
       @click="dataVisible = !dataVisible"
-    ) {{ dataVisible ? 'Hide raw data' : 'Show raw data' }}
+    ) {{ dataVisible ? $t('aiSummaryView.hideRawData') : $t('aiSummaryView.showRawData') }}
 
   b-alert(v-if="error" variant="danger" show dismissible @dismissed="error = ''")
     | {{ error }}
@@ -56,17 +54,17 @@ div
   div(v-if="dataVisible && aggregatedText")
     b-card.mb-3
       template(slot="header")
-        strong Raw activity data sent to LLM
+        strong {{ $t('aiSummaryView.rawDataHeader') }}
       pre.mb-0(style="white-space: pre-wrap; font-size: 0.85em") {{ aggregatedText }}
 
   div(v-if="llmResponse")
     b-card
       template(slot="header")
         div.d-flex.justify-content-between.align-items-center
-          strong AI Summary
+          strong {{ $t('nav.aiSummary') }}
           b-button(size="sm" variant="outline-secondary" @click="copyResponse")
             icon(name="copy")
-            |  {{ copied ? 'Copied!' : 'Copy' }}
+            |  {{ copied ? $t('aiSummaryView.copied') : $t('aiSummaryView.copyBtn') }}
       div(style="white-space: pre-wrap") {{ llmResponse }}
 </template>
 
@@ -122,9 +120,9 @@ export default {
     },
     dateRangeOptions() {
       return [
-        { value: 'last7d', text: 'Last 7 days' },
-        { value: 'last30d', text: 'Last 30 days' },
-        { value: 'last90d', text: 'Last 90 days' },
+        { value: 'last7d', text: this.$t('workReport.last7dOption') },
+        { value: 'last30d', text: this.$t('workReport.last30dOption') },
+        { value: 'last90d', text: this.$t('aiSummaryView.last90dOption') },
       ];
     },
     providerOptions() {
@@ -174,11 +172,11 @@ export default {
       this.aggregatedText = '';
 
       if (!this.selectedHost) {
-        this.error = 'No host with a window-watcher bucket found.';
+        this.error = this.$t('aiSummaryView.noHostError');
         return;
       }
       if (!this.apiKey.trim()) {
-        this.error = 'Please enter your LLM API key.';
+        this.error = this.$t('aiSummaryView.noApiKeyError');
         return;
       }
 
@@ -216,7 +214,9 @@ export default {
         b => b.type === 'currentwindow' && b.hostname === this.selectedHost
       );
       if (!windowBucket) {
-        throw new Error(`No window-watcher bucket found for host: ${this.selectedHost}`);
+        throw new Error(
+          this.$t('aiSummaryView.noWindowBucketError', { host: this.selectedHost }) as string
+        );
       }
 
       const end = new Date();
@@ -232,7 +232,7 @@ export default {
           this.copied = false;
         }, 2000);
       } catch {
-        this.error = 'Could not copy to clipboard';
+        this.error = this.$t('aiSummaryView.copyError');
       }
     },
   },
