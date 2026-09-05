@@ -2,8 +2,8 @@
 div
   div.d-flex.align-items-center.mb-4
     span.text-muted
-      | {{ $t('settings.dataManagement.dbSizeLabel') }}
-      strong.ml-1 {{ storageSizeText }}
+      | {{ $t('settings.dataManagement.dbSizeLabel') }}&nbsp;
+      strong {{ storageSizeText }}
     b-btn.ml-2(@click="fetchStorageSize" variant="outline-secondary" size="sm" :disabled="storageSizeLoading")
       icon(name="sync")
 
