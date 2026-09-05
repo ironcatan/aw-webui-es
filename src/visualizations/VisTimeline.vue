@@ -271,8 +271,8 @@ export default {
           // edit flow. Persist the dismissal via localStorage so the user
           // doesn't see it every session.
           if (!this.editRefreshHintDismissed()) {
-            this.$bvToast.toast('Your edit is saved. Refresh the timeline to see it reflected.', {
-              title: 'Heads up',
+            this.$bvToast.toast(this.$t('visTimeline.editSavedToast'), {
+              title: this.$t('visTimeline.headsUp'),
               variant: 'info',
               autoHideDelay: 6000,
               solid: true,

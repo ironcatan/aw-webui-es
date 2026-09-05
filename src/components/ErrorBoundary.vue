@@ -29,8 +29,7 @@ export default {
     if (err.response && err.response.data && err.response.data.message) {
       msg = err.response.data.message;
     } else if (err.name && err.message) {
-      msg = `${err.name}: ${err.message}.
-				See dev console (F12) and/or server logs for more info.`;
+      msg = `${err.name}: ${err.message}.\n${this.$t('errorBoundary.seeDevConsole')}`;
     }
 
     this.errors.push({

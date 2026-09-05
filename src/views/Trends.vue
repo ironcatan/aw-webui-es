@@ -1,7 +1,7 @@
 <template lang="pug">
 div
   div.d-flex.flex-wrap.align-items-center.mb-3
-    h3.mb-0.mr-3 Trends
+    h3.mb-0.mr-3 {{ $t('nav.trends') }}
 
     b-button-group.mr-2.mb-1(size="sm")
       b-button.px-3(
@@ -22,45 +22,45 @@ div
     )
 
     small.text-muted.ml-auto.mb-1
-      | Comparing #[b {{ currentRangeLabel }}] vs #[b {{ previousRangeLabel }}].
+      | {{ $t('trendsView.comparing') }} #[b {{ currentRangeLabel }}] {{ $t('trendsView.vs') }} #[b {{ previousRangeLabel }}].
 
   div(v-if="!host")
     b-alert(show variant="info")
-      | No host with window/AFK buckets available. Install
-      | #[a(href="https://docs.activitywatch.net/en/latest/watchers.html") aw-watcher-window and aw-watcher-afk]
-      | to use this view.
+      | {{ $t('trendsView.noHostInstall') }}
+      | #[a(href="https://docs.activitywatch.net/en/latest/watchers.html") {{ $t('alerts.watchersLinkText') }}]
+      | {{ $t('trendsView.toUseThisView') }}
 
   div(v-else-if="loading")
     b-spinner.mr-2(small)
-    span.text-muted Computing trends over {{ periodDays }} + {{ periodDays }} days…
+    span.text-muted {{ $t('trendsView.computingTrends', { days: periodDays }) }}
 
   div(v-else)
     b-row.mb-3
       b-col(md="4")
         b-card.h-100
-          small.text-muted Active time
+          small.text-muted {{ $t('trendsView.activeTime') }}
           h4.mb-0 {{ totalCurrent | friendlyduration }}
           div.small.mt-1(:class="deltaClass(totalDelta)")
-            | {{ formatDelta(totalCurrent, totalPrevious) }} vs previous {{ periodDays }} days
+            | {{ formatDelta(totalCurrent, totalPrevious) }} {{ $t('trendsView.vsPrevious', { days: periodDays }) }}
       b-col(md="4")
         b-card.h-100
-          small.text-muted Daily average
+          small.text-muted {{ $t('trendsView.dailyAverage') }}
           h4.mb-0 {{ avgPerDay | friendlyduration }}
           div.small.mt-1(:class="deltaClass(avgDelta)")
-            | {{ formatDelta(avgPerDay, avgPerDayPrevious) }} per day
+            | {{ formatDelta(avgPerDay, avgPerDayPrevious) }} {{ $t('trendsView.perDay') }}
       b-col(md="4")
         b-card.h-100
-          small.text-muted Most-active day
+          small.text-muted {{ $t('trendsView.mostActiveDay') }}
           h4.mb-0(v-if="busiestDay") {{ busiestDay.label }}
           h4.mb-0.text-muted(v-else) —
-          div.small.text-muted.mt-1(v-if="busiestDay") {{ busiestDay.duration | friendlyduration }} on this day
+          div.small.text-muted.mt-1(v-if="busiestDay") {{ busiestDay.duration | friendlyduration }} {{ $t('trendsView.onThisDay') }}
 
-    h5.mt-3 Time per day
+    h5.mt-3 {{ $t('trendsView.timePerDay') }}
     aw-timeline-barchart(:datasets="datasets" :height="100")
 
-    h5.mt-4 Top changes by category
+    h5.mt-4 {{ $t('trendsView.topChanges') }}
     p.small.text-muted(v-if="categoryTrends.length === 0")
-      | No categorized data to compare.
+      | {{ $t('trendsView.noCategorizedData') }}
     b-table.mt-2(
       v-else
       small
@@ -71,7 +71,7 @@ div
       :sort-desc="true"
     )
       template(#cell(category)="row")
-        | {{ row.item.category.join(' > ') || 'Uncategorized' }}
+        | {{ row.item.category.join(' > ') || $t('trendsView.uncategorized') }}
       template(#cell(current)="row")
         | {{ row.item.current | friendlyduration }}
       template(#cell(previous)="row")
@@ -118,11 +118,7 @@ export default {
       settingsStore: useSettingsStore(),
 
       periodDays: 7,
-      periodOptions: [
-        { value: 7, text: '7 days' },
-        { value: 30, text: '30 days' },
-        { value: 90, text: '90 days' },
-      ],
+      periodOptions: [],
 
       loading: false,
 
@@ -133,14 +129,32 @@ export default {
       currentTotals: {} as CategoryTotals,
       previousTotals: {} as CategoryTotals,
 
-      categoryFields: [
-        { key: 'category', label: 'Category', sortable: true },
-        { key: 'current', label: 'Current', class: 'text-right', sortable: true },
-        { key: 'previous', label: 'Previous', class: 'text-right', sortable: true },
-        { key: 'delta', label: 'Change', class: 'text-right', sortable: true },
-        { key: 'absDelta', label: '', class: 'd-none', sortable: true },
-      ],
+      categoryFields: [],
     };
+  },
+  created() {
+    this.periodOptions = [
+      { value: 7, text: this.$t('activity.periodLast7d') },
+      { value: 30, text: this.$t('activity.periodLast30d') },
+      { value: 90, text: this.$t('trendsView.days90') },
+    ];
+    this.categoryFields = [
+      { key: 'category', label: this.$t('trendsView.categoryCol'), sortable: true },
+      {
+        key: 'current',
+        label: this.$t('trendsView.currentCol'),
+        class: 'text-right',
+        sortable: true,
+      },
+      {
+        key: 'previous',
+        label: this.$t('trendsView.previousCol'),
+        class: 'text-right',
+        sortable: true,
+      },
+      { key: 'delta', label: this.$t('trendsView.changeCol'), class: 'text-right', sortable: true },
+      { key: 'absDelta', label: '', class: 'd-none', sortable: true },
+    ];
   },
 
   computed: {
