@@ -699,7 +699,7 @@ export default {
     estTotalLabel: '· Total est.:',
     categoryCol: 'Categoría',
     hoursCol: 'Horas',
-    rateCol: 'Tarifa ($/h)',
+    rateCol: 'Tarifa ({currency}/h)',
     amountCol: 'Importe',
     noHostSelectedError: 'Selecciona al menos un host.',
     noSupportedHostsError: 'Ningún host compatible (requiere aw-watcher-afk): {hosts}',

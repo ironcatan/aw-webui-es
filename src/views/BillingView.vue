@@ -14,7 +14,7 @@ div
 
     div.col-md-4
       b-form-group(:label="$t('billing.hourlyRateLabel')" label-class="font-weight-bold")
-        b-input-group(prepend="$")
+        b-input-group(:prepend="currencySymbol")
           b-form-input(
             v-model.number="defaultRate"
             type="number"
@@ -51,7 +51,7 @@ div
         tr
           th {{ $t('billing.categoryCol') }}
           th.text-right {{ $t('billing.hoursCol') }}
-          th.text-right {{ $t('billing.rateCol') }}
+          th.text-right {{ $t('billing.rateCol', { currency: currencySymbol }) }}
           th.text-right {{ $t('billing.amountCol') }}
       tbody
         tr(v-for="row in categoryRows" :key="row.key")
@@ -147,6 +147,9 @@ export default {
     };
   },
   computed: {
+    currencySymbol(): string {
+      return this.$i18n.locale === 'es' ? '€' : '$';
+    },
     hostOptions() {
       return getWorkReportHostOptions(this.bucketsStore.buckets || []);
     },
@@ -290,7 +293,7 @@ export default {
 
     formatAmount(amount: number): string {
       if (!amount) return '—';
-      return `$${amount.toFixed(2)}`;
+      return `${this.currencySymbol}${amount.toFixed(2)}`;
     },
 
     exportCSV() {
@@ -303,7 +306,12 @@ export default {
         '',
       ].join('\n');
 
-      const cols = ['Category', 'Hours', 'Rate ($/h)', 'Amount ($)'];
+      const cols = [
+        this.$t('billing.categoryCol'),
+        this.$t('billing.hoursCol'),
+        this.$t('billing.rateCol', { currency: this.currencySymbol }),
+        `${this.$t('billing.amountCol')} (${this.currencySymbol})`,
+      ];
       const rows = this.categoryRows.map(row => {
         const rate = this.getEffectiveRate(row);
         const amount = this.getAmount(row);

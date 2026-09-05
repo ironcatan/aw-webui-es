@@ -682,7 +682,7 @@ export default {
     estTotalLabel: '· Est. Total:',
     categoryCol: 'Category',
     hoursCol: 'Hours',
-    rateCol: 'Rate ($/h)',
+    rateCol: 'Rate ({currency}/h)',
     amountCol: 'Amount',
     noHostSelectedError: 'Please select at least one host.',
     noSupportedHostsError: 'No supported hosts (require aw-watcher-afk): {hosts}',
