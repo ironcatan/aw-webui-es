@@ -6,10 +6,6 @@ A web-based UI for time tracking, built with Vue.js.
 `aw-webui`, maintained by Manuel Arroyo Algar. It is not affiliated with or
 endorsed by the ActivityWatch project.** Licensed under MPLv2, same as upstream.
 
-[![Build Status](https://github.com/ActivityWatch/aw-webui/workflows/Build/badge.svg)](https://github.com/ActivityWatch/aw-webui/actions)
-[![Coverage Status](https://codecov.io/gh/ActivityWatch/aw-webui/branch/master/graph/badge.svg)](https://codecov.io/gh/ActivityWatch/aw-webui)
-[![Known Vulnerabilities](https://snyk.io/test/github/ActivityWatch/aw-webui/badge.svg)](https://snyk.io/test/github/ActivityWatch/aw-webui)
-
 ## Cambios sobre el original
 
 - Traducción completa de la interfaz al español (`es`), realizada por Manuel
