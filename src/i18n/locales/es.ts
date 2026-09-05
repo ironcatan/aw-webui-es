@@ -204,7 +204,8 @@ export default {
     },
     dataManagement: {
       backupTitle: 'Copia de seguridad',
-      backupHint: 'Descarga un archivo JSON con todos tus buckets y eventos.',
+      backupHint:
+        'Descarga un archivo JSON con todos tus buckets y eventos, además de tus ajustes (incluidos los umbrales de alertas de notificaciones).',
       downloadBtn: 'Descargar copia de seguridad',
       backupError:
         'No se pudo crear la copia de seguridad. Revisa la consola del navegador para más detalles.',

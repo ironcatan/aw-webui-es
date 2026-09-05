@@ -73,8 +73,12 @@ export default {
       this.backupError = '';
       try {
         const client = getClient();
-        const resp = await client.req.get('/0/export');
-        const text = JSON.stringify(resp.data, null, 2);
+        const [exportResp, settingsResp] = await Promise.all([
+          client.req.get('/0/export'),
+          client.req.get('/0/settings'),
+        ]);
+        const payload = { ...exportResp.data, settings: settingsResp.data };
+        const text = JSON.stringify(payload, null, 2);
         const date = new Date().toISOString().slice(0, 10);
         await downloadFile(`aw-backup-${date}.json`, text, 'application/json');
       } catch (e) {
@@ -103,6 +107,11 @@ export default {
         const parsed = JSON.parse(await file.text());
         const client = getClient();
         await client.req.post('/0/import', parsed);
+        if (parsed.settings && typeof parsed.settings === 'object') {
+          for (const [key, value] of Object.entries(parsed.settings)) {
+            await client.req.post(`/0/settings/${key}`, value);
+          }
+        }
         this.restoreSuccess = true;
         this.restoreMessage = this.$t('settings.dataManagement.restoreSuccess') as string;
       } catch (e) {

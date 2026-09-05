@@ -193,7 +193,8 @@ export default {
     },
     dataManagement: {
       backupTitle: 'Backup',
-      backupHint: 'Download a JSON file containing all your buckets and events.',
+      backupHint:
+        'Download a JSON file containing all your buckets and events, plus your settings (including notification alert thresholds).',
       downloadBtn: 'Download backup',
       backupError: 'Failed to create backup. Check the browser console for details.',
       restoreTitle: 'Restore',
