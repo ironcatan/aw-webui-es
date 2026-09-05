@@ -116,6 +116,8 @@ export default {
       notifications: 'Notificaciones',
       notificationsHelp:
         'Configura los umbrales compartidos de alertas de aw-notify para Android y escritorio.',
+      data: 'Gestión de datos',
+      dataHelp: 'Haz copia de seguridad, restaura o purga tus datos de actividad guardados.',
     },
     language: {
       title: 'Idioma',
@@ -199,6 +201,34 @@ export default {
       hideUnsupportedVisHelp:
         'Oculta las visualizaciones a las que les faltan datos necesarios en vez de mostrar un aviso. Desactivado por defecto.',
       commitHash: 'Hash del commit de la web UI:',
+    },
+    dataManagement: {
+      backupTitle: 'Copia de seguridad',
+      backupHint: 'Descarga un archivo JSON con todos tus buckets y eventos.',
+      downloadBtn: 'Descargar copia de seguridad',
+      backupError:
+        'No se pudo crear la copia de seguridad. Revisa la consola del navegador para más detalles.',
+      restoreTitle: 'Restaurar',
+      restoreHint:
+        'Importa un archivo de copia de seguridad descargado previamente. Solo funciona si ninguno de los buckets del archivo existe ya — está pensado para restaurar en una instalación nueva, no para fusionar con una existente.',
+      restoreBtn: 'Elegir archivo de copia...',
+      restoreConfirmPrompt:
+        '¿Importar esta copia de seguridad? Puede fallar o crear datos duplicados si alguno de sus buckets ya existe.',
+      restoreWrongType: 'Selecciona un archivo JSON.',
+      restoreSuccess: 'Copia de seguridad importada correctamente.',
+      restoreError:
+        'Error al importar la copia de seguridad. Puede pasar si algún bucket del archivo ya existe.',
+      purgeTitle: 'Eliminar datos antiguos',
+      purgeHint:
+        'Borra permanentemente todos los eventos anteriores a una fecha dada, en todos los buckets. No se puede deshacer — considera descargar una copia de seguridad antes.',
+      purgeDateLabel: 'Eliminar eventos anteriores a',
+      purgeBtn: 'Eliminar eventos antiguos',
+      purgeModalTitle: 'Confirmar eliminación',
+      purgeModalBody:
+        'Esto eliminará permanentemente todos los eventos anteriores al {date} en todos los buckets. No se puede deshacer. ¿Seguro?',
+      purgeModalConfirmBtn: 'Sí, eliminar',
+      purgeSuccess: '{count} evento(s) eliminado(s).',
+      purgeError: 'Error al eliminar eventos. Revisa la consola del navegador para más detalles.',
     },
   },
   home: {

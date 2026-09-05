@@ -109,6 +109,8 @@ export default {
       developer: 'Developer',
       notifications: 'Notifications',
       notificationsHelp: 'Configure shared aw-notify alert thresholds for Android and desktop.',
+      data: 'Data management',
+      dataHelp: 'Back up, restore, or purge your stored activity data.',
     },
     language: {
       title: 'Language',
@@ -188,6 +190,33 @@ export default {
       hideUnsupportedVisHelp:
         'Hide visualizations that lack required data instead of showing a warning. Disabled by default.',
       commitHash: 'Web UI commit hash:',
+    },
+    dataManagement: {
+      backupTitle: 'Backup',
+      backupHint: 'Download a JSON file containing all your buckets and events.',
+      downloadBtn: 'Download backup',
+      backupError: 'Failed to create backup. Check the browser console for details.',
+      restoreTitle: 'Restore',
+      restoreHint:
+        'Import a previously downloaded backup file. This only works if none of the buckets in the file already exist — it is meant for restoring onto a fresh install, not merging into an existing one.',
+      restoreBtn: 'Choose backup file...',
+      restoreConfirmPrompt:
+        'Import this backup? This can fail or create duplicate data if any of its buckets already exist.',
+      restoreWrongType: 'Please select a JSON file.',
+      restoreSuccess: 'Backup imported successfully.',
+      restoreError:
+        'Failed to import backup. This can happen if a bucket in the file already exists.',
+      purgeTitle: 'Delete old data',
+      purgeHint:
+        'Permanently delete all events older than a given date, across every bucket. This cannot be undone — consider downloading a backup first.',
+      purgeDateLabel: 'Delete events before',
+      purgeBtn: 'Delete old events',
+      purgeModalTitle: 'Confirm deletion',
+      purgeModalBody:
+        'This will permanently delete all events before {date} in every bucket. This cannot be undone. Are you sure?',
+      purgeModalConfirmBtn: 'Yes, delete',
+      purgeSuccess: '{count} event(s) deleted.',
+      purgeError: 'Failed to delete events. Check the browser console for details.',
     },
   },
   home: {
