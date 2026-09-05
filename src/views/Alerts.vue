@@ -15,7 +15,7 @@ div
 
   b-alert(v-if="hostnames.length === 0" show variant="info")
     | {{ $t('alerts.noHostsInstallPrefix') }}
-    | #[a(href="https://docs.activitywatch.net/en/latest/watchers.html") {{ $t('alerts.watchersLinkText') }}] {{ $t('alerts.noHostsInstallSuffix') }}
+    | {{ $t('alerts.watchersLinkText') }} {{ $t('alerts.noHostsInstallSuffix') }}
 
   b-card(v-for="alert in alerts", :key="alert.name")
     b-button.float-right(@click="deleteAlert(alert.name)" size="sm" variant="outline-danger")

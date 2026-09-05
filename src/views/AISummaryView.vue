@@ -4,7 +4,6 @@ div
 
   b-alert(variant="info" show)
     | {{ $t('aiSummaryView.disclaimerPrefix') }}
-    |  #[a(href="https://docs.activitywatch.net/en/latest/examples/agents-and-ai.html") {{ $t('aiSummaryView.agentsGuideLink') }}].
 
   div.row.mb-3
     div.col-md-4

@@ -34,7 +34,7 @@ div
   div(v-else-if="hostnameEmptyKind === 'no-hosts'")
     p.text-muted.mb-0
       | {{ $t('categoryBuilder.noHostsInstall') }}
-      | #[a(href="https://docs.activitywatch.net/en/latest/watchers.html") {{ $t('categoryBuilder.aWatcher') }}]
+      | {{ $t('categoryBuilder.aWatcher') }}
       | {{ $t('categoryBuilder.toStartCollecting') }}
   div(v-else-if="hostnameEmptyKind === 'hostname-unselected'")
     p.text-muted.mb-0

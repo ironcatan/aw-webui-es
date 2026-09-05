@@ -3,7 +3,7 @@ div
   h3 {{ $t('buckets.title') }}
 
   b-alert(show)
-    | {{ $t('buckets.moreWatchers') }} #[a(href="https://docs.activitywatch.net/en/latest/watchers.html") {{ $t('buckets.docsLink') }}].
+    | {{ $t('buckets.moreWatchers') }}
 
   b-card.bucket-card.mb-3(
     v-for="device in bucketsStore.bucketsByDevice",

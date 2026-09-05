@@ -3,7 +3,7 @@ div
   h3 {{ $t('nav.graph') }}
 
   b-alert(show variant="warning")
-    | {{ $t('graphView.earlyDevPrefix') }} #[a(href="https://github.com/ActivityWatch/aw-webui/pull/365") aw-webui#365] {{ $t('graphView.forMoreInfo') }}
+    | {{ $t('graphView.earlyDev') }}
 
   p {{ $t('graphView.description') }}
 

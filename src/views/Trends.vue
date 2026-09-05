@@ -27,7 +27,7 @@ div
   div(v-if="!host")
     b-alert(show variant="info")
       | {{ $t('trendsView.noHostInstall') }}
-      | #[a(href="https://docs.activitywatch.net/en/latest/watchers.html") {{ $t('alerts.watchersLinkText') }}]
+      | {{ $t('alerts.watchersLinkText') }}
       | {{ $t('trendsView.toUseThisView') }}
 
   div(v-else-if="loading")

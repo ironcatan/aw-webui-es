@@ -6,8 +6,7 @@ div
 
   div(v-if="!bucketId")
     p.text-muted
-      | {{ $t('timespiral.noAfkBucket') }}
-      | #[a(href="https://docs.activitywatch.net/en/latest/watchers.html") aw-watcher-afk]
+      | {{ $t('timespiral.noAfkBucket') }} aw-watcher-afk
       | {{ $t('timespiral.noAfkBucketSuffix') }}
   div(v-else)
     p.small.text-muted {{ $t('timespiral.bucketLabel') }} #[code {{ bucketId }}] &middot; {{ $t('timespiral.eventsLabel') }} {{ events.length }}

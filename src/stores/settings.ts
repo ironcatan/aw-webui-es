@@ -23,9 +23,6 @@ function jsonEq(a: any, b: any) {
 
 let settingsLoadPromise: Promise<void> | null = null;
 
-// Initial wait period for UserSatisfactionPoll
-export const INITIAL_WAIT_PERIOD = 7 * 24 * 60 * 60;
-
 interface State {
   // Timestamp when user was first seen (first time webapp is run)
   initialTimestamp: Moment;
@@ -38,11 +35,6 @@ interface State {
   theme: 'light' | 'dark' | 'auto';
   locale: string;
 
-  userSatisfactionPollData: {
-    isEnabled: boolean;
-    nextPollTime: Moment;
-    timesPollIsShown: number;
-  };
   uncategorizedNotificationData: {
     isEnabled: boolean;
     // Below this total tracked duration (seconds) the hint is hidden —
@@ -93,11 +85,6 @@ export const useSettingsStore = defineStore('settings', {
     theme: 'auto',
     locale: 'en',
 
-    userSatisfactionPollData: {
-      isEnabled: true,
-      nextPollTime: moment().add(INITIAL_WAIT_PERIOD, 'seconds'),
-      timesPollIsShown: 0,
-    },
     uncategorizedNotificationData: {
       isEnabled: true,
       minTotalSeconds: 60 * 60, // 1 hour
