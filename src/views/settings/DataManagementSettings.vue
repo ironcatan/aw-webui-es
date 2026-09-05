@@ -1,5 +1,12 @@
 <template lang="pug">
 div
+  div.d-flex.align-items-center.mb-4
+    span.text-muted
+      | {{ $t('settings.dataManagement.dbSizeLabel') }}
+      strong.ml-1 {{ storageSizeText }}
+    b-btn.ml-2(@click="fetchStorageSize" variant="outline-secondary" size="sm" :disabled="storageSizeLoading")
+      icon(name="sync")
+
   h5.mb-2 {{ $t('settings.dataManagement.backupTitle') }}
   p.text-muted.small {{ $t('settings.dataManagement.backupHint') }}
   b-btn(@click="downloadBackup" variant="outline-primary" size="sm" :disabled="backupInProgress")
@@ -44,14 +51,29 @@ div
 <script lang="ts">
 import 'vue-awesome/icons/download';
 import 'vue-awesome/icons/trash';
+import 'vue-awesome/icons/sync';
 import { getClient } from '~/util/awclient';
 import { downloadFile } from '~/util/export';
 import { shouldAttemptJsonImport } from '~/util/importFile';
+
+function formatBytes(bytes: number): string {
+  if (bytes < 1024) return `${bytes} B`;
+  const units = ['KB', 'MB', 'GB', 'TB'];
+  let value = bytes;
+  let unitIndex = -1;
+  do {
+    value /= 1024;
+    unitIndex++;
+  } while (value >= 1024 && unitIndex < units.length - 1);
+  return `${value.toFixed(1)} ${units[unitIndex]}`;
+}
 
 export default {
   name: 'DataManagementSettings',
   data() {
     return {
+      storageSizeBytes: null as number | null,
+      storageSizeLoading: false,
       backupInProgress: false,
       backupError: '',
       restoreMessage: '',
@@ -66,8 +88,29 @@ export default {
     todayStr(): string {
       return new Date().toISOString().slice(0, 10);
     },
+    storageSizeText(): string {
+      if (this.storageSizeLoading) return this.$t('common.loading') as string;
+      if (this.storageSizeBytes === null) return '—';
+      return formatBytes(this.storageSizeBytes);
+    },
+  },
+  created() {
+    this.fetchStorageSize();
   },
   methods: {
+    async fetchStorageSize() {
+      this.storageSizeLoading = true;
+      try {
+        const client = getClient();
+        const resp = await client.req.get('/0/storage_size');
+        this.storageSizeBytes = resp.data.size;
+      } catch (e) {
+        console.error('Failed to fetch storage size', e);
+        this.storageSizeBytes = null;
+      } finally {
+        this.storageSizeLoading = false;
+      }
+    },
     async downloadBackup() {
       this.backupInProgress = true;
       this.backupError = '';
@@ -137,6 +180,7 @@ export default {
         this.purgeMessage = this.$t('settings.dataManagement.purgeSuccess', {
           count: total,
         }) as string;
+        this.fetchStorageSize();
       } catch (e) {
         console.error('Purge failed', e);
         this.purgeSuccess = false;

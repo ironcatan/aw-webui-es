@@ -203,6 +203,7 @@ export default {
       commitHash: 'Hash del commit de la web UI:',
     },
     dataManagement: {
+      dbSizeLabel: 'Tamaño de la base de datos:',
       backupTitle: 'Copia de seguridad',
       backupHint:
         'Descarga un archivo JSON con todos tus buckets y eventos, además de tus ajustes (incluidos los umbrales de alertas de notificaciones).',

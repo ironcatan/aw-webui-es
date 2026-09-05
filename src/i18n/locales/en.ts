@@ -192,6 +192,7 @@ export default {
       commitHash: 'Web UI commit hash:',
     },
     dataManagement: {
+      dbSizeLabel: 'Database size:',
       backupTitle: 'Backup',
       backupHint:
         'Download a JSON file containing all your buckets and events, plus your settings (including notification alert thresholds).',
