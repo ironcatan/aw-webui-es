@@ -8,8 +8,12 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
 const __dirname = path.dirname(__filename); // get the name of the directory
 
-// get git info from command line
-const _COMMIT_HASH = child_process.execSync('git rev-parse --short HEAD').toString().trim();
+// In Docker, the submodule's real .git metadata isn't in the build context, so
+// the real hash is passed in via WEBUI_COMMIT_HASH (see Dockerfile). Falls
+// back to reading git directly for local/dev builds outside Docker.
+const _COMMIT_HASH =
+  process.env.WEBUI_COMMIT_HASH ||
+  child_process.execSync('git rev-parse --short HEAD').toString().trim();
 console.info('Commit hash:', _COMMIT_HASH);
 
 export default {
