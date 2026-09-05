@@ -216,56 +216,11 @@ export default {
     },
   },
   home: {
-    note: 'Note:',
-    androidNote:
-      'ActivityWatch on Android is in a very early stage of development. There will be bugs, but we hope you bear with us as we refine things and get it on par with the desktop version of ActivityWatch (which you should try!).',
-    greeting: 'Welcome to ActivityWatch',
-    intro1:
-      "We've come a long way{android} but we still need users (like you!) to provide feedback and help us turn ActivityWatch into a successful project. We'd love to hear any ideas you have for improvements.",
-    introAndroid: ' (especially on Android!)',
-    intro3:
-      'If you are a developer, we hope you can contribute by writing a watcher, visualization, or something else, and share it with us on the forum!',
-    thanks: 'Thank you for using ActivityWatch!',
-    surveyFill: 'Fill out our user survey',
-    surveySuffix: 'to help shape what comes next.',
-    surveyOr: 'or',
-    voteForum: 'vote on features on the forum',
-    spreadTitle: 'Spread the word',
-    spread1:
-      'Nothing is as motivating as getting ActivityWatch into the hands of users. By sharing it you get us to make ActivityWatch even better!',
-    spreadReview: 'Give us a like and a review on',
-    spreadVote: 'Vote on us at',
-    spreadFollow: 'Follow us and spread the word on',
-    spreadStar: 'Star us on',
-    supportTitle: 'Support us!',
-    subscribeIntro:
-      'The best way to keep ActivityWatch maintained is a subscription — from $5/month, every feature stays free, cancel anytime.',
-    subscribeCta: 'Support ActivityWatch →',
-    support1:
-      'Do you like ActivityWatch? Has it helped you? Help us help you by donating! You can donate to us via:',
-    support2: 'For more info, please visit the',
-    donationPage: 'donation page on the website',
-    otherDonationMethods: 'Other methods (incl. cryptocurrency)',
-    resourcesTitle: 'Resources',
-    website: 'Website',
-    documentation: 'Documentation',
-    forum: 'Forum',
-    discord: 'Discord',
-    reddit: 'Reddit',
+    greeting: 'Welcome to Chronly',
+    intro: 'Chronly is a private fork of ActivityWatch (MPLv2) — everything is stored locally on this machine, under your control.',
     apiBrowser: 'API Browser',
-    workingOnTitle: "What we're working on",
-    workingOnPrefix: 'Stay up to date with the',
-    devUpdates: 'development updates',
-    workingOnMiddle: 'and follow the project on',
-    workingOnSuffix: 'for release notes.',
     landingHint:
-      'You can change which page opens when you open ActivityWatch (instead of this page) in the',
-    supporterNudge: {
-      message:
-        "You've been getting a lot out of ActivityWatch — would you consider supporting its development?",
-      support: 'Support ActivityWatch →',
-      notNow: 'Not now',
-    },
+      'You can change which page opens when you open Chronly (instead of this page) in the',
   },
   buckets: {
     title: 'Buckets',

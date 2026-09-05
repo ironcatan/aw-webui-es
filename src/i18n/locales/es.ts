@@ -228,56 +228,12 @@ export default {
     },
   },
   home: {
-    note: 'Nota:',
-    androidNote:
-      'ActivityWatch en Android está en una fase muy temprana de desarrollo. Habrá errores, pero esperamos que tengas paciencia mientras pulimos las cosas y lo ponemos a la altura de la versión de escritorio de ActivityWatch (¡que deberías probar!).',
-    greeting: 'Bienvenido a ActivityWatch',
-    intro1:
-      'Hemos avanzado mucho{android} pero seguimos necesitando que usuarios (¡como tú!) nos den su opinión y ayuden a convertir ActivityWatch en un proyecto exitoso. Nos encantaría escuchar cualquier idea que tengas para mejorarlo.',
-    introAndroid: ' (¡especialmente en Android!)',
-    intro3:
-      'Si eres desarrollador, esperamos que puedas contribuir escribiendo un watcher, una visualización, u otra cosa, ¡y compartirlo con nosotros en el foro!',
-    thanks: '¡Gracias por usar ActivityWatch!',
-    surveyFill: 'Rellena nuestra encuesta de usuarios',
-    surveySuffix: 'para ayudarnos a definir qué viene después.',
-    surveyOr: 'o',
-    voteForum: 'vota funciones en el foro',
-    spreadTitle: 'Corre la voz',
-    spread1:
-      'Nada es tan motivador como poner ActivityWatch en manos de los usuarios. ¡Al compartirlo nos ayudas a hacer ActivityWatch aún mejor!',
-    spreadReview: 'Danos un like y una reseña en',
-    spreadVote: 'Vótanos en',
-    spreadFollow: 'Síguenos y corre la voz en',
-    spreadStar: 'Danos una estrella en',
-    supportTitle: '¡Apóyanos!',
-    subscribeIntro:
-      'La mejor forma de mantener ActivityWatch es una suscripción — desde $5/mes, todas las funciones siguen siendo gratis, cancela cuando quieras.',
-    subscribeCta: 'Apoya a ActivityWatch →',
-    support1:
-      '¿Te gusta ActivityWatch? ¿Te ha ayudado? ¡Ayúdanos a ayudarte donando! Puedes donar a través de:',
-    support2: 'Para más información, visita la',
-    donationPage: 'página de donaciones en el sitio web',
-    otherDonationMethods: 'Otros métodos (incl. criptomoneda)',
-    resourcesTitle: 'Recursos',
-    website: 'Sitio web',
-    documentation: 'Documentación',
-    forum: 'Foro',
-    discord: 'Discord',
-    reddit: 'Reddit',
+    greeting: 'Bienvenido a Chronly',
+    intro:
+      'Chronly es un fork privado de ActivityWatch (MPLv2) — todo se guarda localmente en esta máquina, bajo tu control.',
     apiBrowser: 'Explorador de API',
-    workingOnTitle: 'En qué estamos trabajando',
-    workingOnPrefix: 'Mantente al día con las',
-    devUpdates: 'actualizaciones de desarrollo',
-    workingOnMiddle: 'y sigue el proyecto en',
-    workingOnSuffix: 'para notas de la versión.',
     landingHint:
-      'Puedes cambiar qué página se abre al iniciar ActivityWatch (en vez de esta página) en',
-    supporterNudge: {
-      message:
-        'Le has estado sacando mucho partido a ActivityWatch — ¿considerarías apoyar su desarrollo?',
-      support: 'Apoya a ActivityWatch →',
-      notNow: 'Ahora no',
-    },
+      'Puedes cambiar qué página se abre al iniciar Chronly (en vez de esta página) en',
   },
   buckets: {
     title: 'Buckets',
