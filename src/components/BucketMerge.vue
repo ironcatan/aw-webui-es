@@ -1,43 +1,39 @@
 <template lang="pug">
 div
-  h3 Merge buckets
+  h3 {{ $t('bucketMerge.title') }}
   p.small
-    | Sometimes, you might want to merge the events of two buckets together into one.
-    | This is commonly useful to address the case where your hostname might have changed,
-    | creating two buckets for the same watcher and host, which you want to combine together again.
+    | {{ $t('bucketMerge.intro') }}
 
   // TODO: select which buckets to merge
   b-row
     b-col
-      h4 Bucket from
+      h4 {{ $t('bucketMerge.bucketFrom') }}
       b-form-select(v-model="bucket_from" :options="buckets" :disabled="buckets.length === 0")
       p.small
-        | Select the bucket from which you want to merge the events.
-        | This bucket will be deleted after the merge.
+        | {{ $t('bucketMerge.selectFrom') }}
       p.small(v-if="events_from !== null")
-        | Events: {{ events_from.length }}
+        | {{ $t('bucketValidate.eventsCount', { count: events_from.length }) }}
     b-col
-      h4 Bucket to
+      h4 {{ $t('bucketMerge.bucketTo') }}
       b-form-select(v-model="bucket_to" :options="buckets" :disabled="buckets.length === 0")
       p.small
-        | Select the bucket to which you want to merge the events.
-        | This bucket will remain after the merge.
+        | {{ $t('bucketMerge.selectTo') }}
       p.small(v-if="events_to !== null")
-        | Events: {{ events_to.length }}
+        | {{ $t('bucketValidate.eventsCount', { count: events_to.length }) }}
 
   // TODO: check for overlapping events
   div(v-if="overlappingEvents !== null && overlappingEvents.length > 0")
-    h3 Overlapping events
+    h3 {{ $t('bucketMerge.overlappingTitle') }}
     p
-      | The following {{ overlappingEvents.length }} events are overlapping:
+      | {{ $t('bucketMerge.overlappingFound', { count: overlappingEvents.length }) }}
       ul
         li(v-for="event in overlappingEvents")
           | {{ event[0].start }} - {{ event[0].end }} ({{ event[0].event.id }})
-          | overlaps with
+          | {{ $t('bucketMerge.overlapsWith') }}
           | {{ event[1].start }} - {{ event[1].end }} ({{ event[1].event.id }})
 
   // TODO: confirm dialog
-  b-button(variant="success" :disabled="!validate" @click="merge()") Merge
+  b-button(variant="success" :disabled="!validate" @click="merge()") {{ $t('bucketMerge.mergeBtn') }}
 
   // TODO: delete old bucket? (ask user to backup their db if they want to be able to restore after delete)
 </template>

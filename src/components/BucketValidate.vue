@@ -1,18 +1,18 @@
 <template lang="pug">
 div
-  h3 Validate buckets
+  h3 {{ $t('bucketValidate.title') }}
   p.small
-    | This is a small tool to check the validity of your buckets and their events.
+    | {{ $t('bucketValidate.intro') }}
 
   // Form
   b-row
     b-col
-      h4 Bucket
+      h4 {{ $t('bucketValidate.bucketLabel') }}
       b-form-select(v-model="bucket" :options="buckets" :disabled="buckets.length === 0")
       p.small
-        | Select the bucket to validate.
+        | {{ $t('bucketValidate.selectBucket') }}
       p.small(v-if="events !== null")
-        | Events: {{ events.length }}
+        | {{ $t('bucketValidate.eventsCount', { count: events.length }) }}
 
   // Checks
   // check for duplicate events
@@ -21,12 +21,12 @@ div
       summary
         icon.mx-2(name="check", style="color: #0C0", v-if="duplicateEvents.length === 0")
         icon.mx-2(name="exclamation-triangle", style="color: #CC0", v-else)
-        | Duplicates: {{ duplicateEvents.length }}
+        | {{ $t('bucketValidate.duplicatesCount', { count: duplicateEvents.length }) }}
       div.p-2
         p(v-if="duplicateEvents.length === 0")
-          | No duplicate events found.
+          | {{ $t('bucketValidate.noDuplicates') }}
         p(v-else)
-          | The following {{ duplicateEvents.length }} duplicates were found.
+          | {{ $t('bucketValidate.duplicatesFound', { count: duplicateEvents.length }) }}
           ul.mt-2
             li(v-for="overlap in duplicateEvents")
               | {{ overlap[0].start.toISOString() }} - (id: {{ overlap[0].event.id }} & {{ overlap[1].event.id }}): {{ JSON.stringify(overlap[0].data) }}
@@ -37,15 +37,15 @@ div
       summary
         icon.mx-2(name="check", style="color: #0C0", v-if="overlappingEvents.length === 0")
         icon.mx-2(name="exclamation-triangle", style="color: #CC0", v-else)
-        | Overlaps: {{ overlappingEvents.length }}x with a total duration of {{ overlapDuration / 1000 | friendlyduration }}
+        | {{ $t('bucketValidate.overlapsCount', { count: overlappingEvents.length, duration: overlapDurationStr }) }}
       div.p-2
         p(v-if="overlappingEvents.length === 0")
-          | No overlapping events found.
+          | {{ $t('bucketValidate.noOverlaps') }}
         p(v-else)
-          | The following {{ overlappingEvents.length }} overlaps were found.
+          | {{ $t('bucketValidate.overlapsFound', { count: overlappingEvents.length }) }}
           br
           span(v-if="overlapDurationSameData > 0")
-            | Of these, {{ overlapDurationSameData / 1000 | friendlyduration }} are overlaps where the data is the same. These events could potentially be merged.
+            | {{ $t('bucketValidate.overlapsSameData', { duration: overlapDurationSameDataStr }) }}
           p.mt-2(v-for="event in overlappingEvents")
             ul
               li {{ event[0].start.toISOString() }}/{{ event[0].end.toISOString() }} - (id: {{ event[0].event.id }}): {{ JSON.stringify(event[0].event.data) }}
@@ -57,12 +57,12 @@ div
       summary
         icon.mx-2(name="check", style="color: #0C0", v-if="zeroDurationEvents.length === 0")
         icon.mx-2(name="info-circle", style="color: #09F", v-else)
-        | Zero-duration events: {{ zeroDurationEvents.length }}
+        | {{ $t('bucketValidate.zeroDurationCount', { count: zeroDurationEvents.length }) }}
       div.p-2
         p.ml-3(v-if="zeroDurationEvents.length === 0")
-          | No zero-duration events found.
+          | {{ $t('bucketValidate.noZeroDuration') }}
         p.ml-3(v-else)
-          | The following {{ zeroDurationEvents.length }} zero-duration events were found:
+          | {{ $t('bucketValidate.zeroDurationFound', { count: zeroDurationEvents.length }) }}
           ul.mt-2
             li(v-for="event in zeroDurationEvents")
               | {{ event.timestamp.toISOString() }}/{{ new Date(new Date(event.timestamp).valueOf() + 1000 * event.duration).toISOString() }} - (id: {{ event.id }}): {{ JSON.stringify(event.data) }}
@@ -77,6 +77,7 @@ import 'vue-awesome/icons/exclamation-triangle';
 import 'vue-awesome/icons/info-circle';
 import { getClient } from '~/util/awclient';
 import { overlappingEvents } from '~/util/transforms';
+import { seconds_to_duration } from '~/util/time';
 import _ from 'lodash';
 
 export default {
@@ -146,6 +147,12 @@ export default {
         return null;
       }
       return this.events.filter(event => event.duration === 0);
+    },
+    overlapDurationStr() {
+      return seconds_to_duration(this.overlapDuration / 1000);
+    },
+    overlapDurationSameDataStr() {
+      return seconds_to_duration(this.overlapDurationSameData / 1000);
     },
   },
   watch: {
