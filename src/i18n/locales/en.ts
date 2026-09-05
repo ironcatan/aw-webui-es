@@ -110,10 +110,6 @@ export default {
       title: 'Language',
       help: 'Interface language for the web UI.',
     },
-    releaseNotification: {
-      title: 'Check for new releases',
-      help: 'When enabled, the web UI checks once per day for a new ActivityWatch release and shows a hint if one is available.',
-    },
     color: {
       title: 'Use fallback colors',
       help: 'Uses the old coloring style for some visualizations when uncategorized or no category color.',
@@ -822,15 +818,6 @@ export default {
     firstLastEventLabel: 'First/last event:',
     eventcountLabel: 'Eventcount:',
     dataLabel: 'Data:',
-  },
-  newReleaseNotification: {
-    newReleaseAvailable: 'A new release, v{version}, is available for',
-    download: 'download',
-    youCanAlso: ', you can also',
-    disable: 'disable',
-    futureReminders: 'future reminders and checks for updates.',
-    disabledFollowUp: 'Checking for new releases is now disabled, you can re-enable it in the',
-    settingsPage: 'settings page',
   },
   queryOptions: {
     hostnameLabel: 'Hostname',

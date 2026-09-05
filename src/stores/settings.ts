@@ -23,10 +23,6 @@ function jsonEq(a: any, b: any) {
 
 let settingsLoadPromise: Promise<void> | null = null;
 
-// Backoffs for NewReleaseNotification
-export const SHORT_BACKOFF_PERIOD = 24 * 60 * 60;
-export const LONG_BACKOFF_PERIOD = 5 * 24 * 60 * 60;
-
 // Initial wait period for UserSatisfactionPoll
 export const INITIAL_WAIT_PERIOD = 7 * 24 * 60 * 60;
 
@@ -42,7 +38,6 @@ interface State {
   theme: 'light' | 'dark' | 'auto';
   locale: string;
 
-  newReleaseCheckData: Record<string, any>;
   userSatisfactionPollData: {
     isEnabled: boolean;
     nextPollTime: Moment;
@@ -98,12 +93,6 @@ export const useSettingsStore = defineStore('settings', {
     theme: 'auto',
     locale: 'en',
 
-    newReleaseCheckData: {
-      isEnabled: true,
-      nextCheckTime: moment().add(SHORT_BACKOFF_PERIOD, 'seconds'),
-      howOftenToCheck: SHORT_BACKOFF_PERIOD,
-      timesChecked: 0,
-    },
     userSatisfactionPollData: {
       isEnabled: true,
       nextPollTime: moment().add(INITIAL_WAIT_PERIOD, 'seconds'),

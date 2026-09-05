@@ -25,7 +25,7 @@ build-vite: prebuild
 dev-vite: prebuild
 	npx vite
 
-static/logo.%: media/logo/logo.%
+static/logo.%: branding/logo.%
 	@mkdir -p static
 	cp $< $@
 

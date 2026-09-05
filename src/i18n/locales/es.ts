@@ -117,10 +117,6 @@ export default {
       title: 'Idioma',
       help: 'Idioma de la interfaz de la web UI.',
     },
-    releaseNotification: {
-      title: 'Buscar nuevas versiones',
-      help: 'Si está activado, la web UI comprueba una vez al día si hay una nueva versión de ActivityWatch y muestra un aviso si está disponible.',
-    },
     color: {
       title: 'Usar colores de reserva',
       help: 'Usa el estilo de color antiguo para algunas visualizaciones cuando no hay categoría o color de categoría.',
@@ -841,16 +837,6 @@ export default {
     firstLastEventLabel: 'Primer/último evento:',
     eventcountLabel: 'Número de eventos:',
     dataLabel: 'Datos:',
-  },
-  newReleaseNotification: {
-    newReleaseAvailable: 'Hay una nueva versión, v{version}, disponible para',
-    download: 'descargar',
-    youCanAlso: ', también puedes',
-    disable: 'desactivar',
-    futureReminders: 'los futuros recordatorios y comprobaciones de actualizaciones.',
-    disabledFollowUp:
-      'La comprobación de nuevas versiones está ahora desactivada, puedes reactivarla en la',
-    settingsPage: 'página de ajustes',
   },
   queryOptions: {
     hostnameLabel: 'Host',
