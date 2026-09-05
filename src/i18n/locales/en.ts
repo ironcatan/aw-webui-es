@@ -25,17 +25,9 @@ export default {
     settings: 'Settings',
   },
   footer: {
-    madeWith: 'Made with',
-    byDevs: 'by the ActivityWatch developers',
+    basedOn: 'Chronly — based on ActivityWatch (MPLv2)',
     host: 'Host:',
     version: 'Version:',
-    reportBug: 'Report a bug',
-    askHelp: 'Ask for help',
-    voteFeatures: 'Vote on features',
-    twitter: 'Twitter',
-    github: 'GitHub',
-    reddit: 'Reddit',
-    donate: 'Donate',
   },
   common: {
     loading: 'Loading...',

@@ -29,17 +29,9 @@ export default {
     settings: 'Ajustes',
   },
   footer: {
-    madeWith: 'Hecho con',
-    byDevs: 'por los desarrolladores de ActivityWatch',
+    basedOn: 'Chronly — basado en ActivityWatch (MPLv2)',
     host: 'Host:',
     version: 'Versión:',
-    reportBug: 'Reportar un error',
-    askHelp: 'Pedir ayuda',
-    voteFeatures: 'Votar funciones',
-    twitter: 'Twitter',
-    github: 'GitHub',
-    reddit: 'Reddit',
-    donate: 'Donar',
   },
   common: {
     loading: 'Cargando...',
